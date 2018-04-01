@@ -1,0 +1,18 @@
+
+// This is an example Siddhi App to calculate the total weight of Cargo items added
+
+@App:name("HelloWorldApp")
+@App:description("To calculate the total weight of cargo items added, considering each cargo box as an event")
+
+define stream CargoStream (weight int);
+
+@info(name='HelloWorldQuery')
+from CargoStream
+select weight, sum(weight) as totalWeight
+insert into OutputStream;
+
+from OutputStream#log("LOGGER")
+select *
+insert into temp2;
+
+
