@@ -37,8 +37,8 @@ import weka.core.*;
 import weka.core.Instances;
 import weka.core.Instance;
 import weka.core.converters.ConverterUtils.DataSource;
-
-public class wekaExample
+import weka.core.neighboursearch.*;
+public class wekaExample 
 {
     public static void main(String[] args) throws Exception
         {
@@ -66,12 +66,17 @@ public class wekaExample
  
 		Classifier ibk = new IBk();		
 		ibk.buildClassifier(data);
+
+		NearestNeighbourSearch knn = new LinearNNSearch(data);
+		Instances ins = knn.kNearestNeighbours(first,3);
+
+		System.out.println("3 NN === " +ins.toString());
  
-		double class1 = ibk.classifyInstance(first);
+		/*double class1 = ibk.classifyInstance(first);
 		double class2 = ibk.classifyInstance(second);
  
 		System.out.println("first: " + class1 + "\nsecond: " + class2);
-
+		*/
 	}
 
 	public static BufferedReader readDataFile(String filename) {
