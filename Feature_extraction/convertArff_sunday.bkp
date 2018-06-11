@@ -1,0 +1,154 @@
+import sys
+import csv
+import os
+import re
+import os.path
+
+file = str(sys.argv[1])
+
+
+def write_to_file(filename,name,count):
+    i = 0
+    if not(os.path.isfile(filename)):
+        with open(filename, "w") as file:
+            for l in name:
+                file.write(l)
+                if i!= count-1:
+                    file.write(',')
+                i+=1
+            file.write("\n")
+
+    else:
+        data_read = ""
+        with open(filename, "r") as f:
+            data_read = f.readlines()
+            f.close() 
+        with open(filename, "w") as file:
+            file.writelines(data_read)
+            for l in name:
+                file.write(l)
+                if i!= count-1:
+                    file.write(',')
+                i+=1
+            file.write("\n")
+
+res = []
+
+pattern = re.compile(r"X=\d[0,1],?[\s]Y=?\d[0,1,2],?[\s]Z=?\d[0,1]")
+#pattern = re.compile(r"X=?\d[0,1]\,[\s]Y=?\d[0,1,2],[\s]Z=?\d[0,1]")
+'''
+#nav = "Hello,world"
+s = ""
+with open(file,'rt') as myfile:
+    for line in myfile:
+        if pattern.search(line) == None:
+            print("Match not found")
+        else:
+            ans = re.findall(r"X=\d[0,1],?[\s]Y=?\d[0,1,2],?[\s]Z=?\d[0,1]",line)
+            print(ans)
+            print("x=",ans[0])
+            #pattern.match(s).group(1)
+            print("Match found")
+
+
+        #print(line)
+        #nav = ((line)).strip(,)
+        #res.append(line.split(":"))
+#var1 = res[0][0]
+#print(s)
+'''
+
+s = ""
+name = []
+with open(file,'rt') as myfile:
+    for linenum, line in enumerate(myfile):
+        if pattern.search(line) == None:
+            print("Match not found")
+        else:
+            #ans = ""
+            ans = re.findall(r"X=1,?[\s]Y=0,?[\s]Z=1",line)
+            print(ans)
+            if len(ans)!=0:
+                val = ans[0]
+                co_ordinates = str(ans)
+                x = co_ordinates[4]
+                y = co_ordinates[9]
+                z = co_ordinates[14]
+                print("cur=",co_ordinates)
+                print("x=",co_ordinates[4])
+                print("y=",co_ordinates[9])
+                print("z=",co_ordinates[14])
+                
+                if "X=1, Y=0, Z=1" in val:
+                    cur = line.strip("[").split(":")[1].strip("[")
+                    vals = cur.split(",")
+                    print("vals=",vals)
+                    for str1 in vals:
+                        name.append( str1.split("=")[1])
+                     
+                    #for entry in vals:
+                    #    csv.append((entry.split('=')[1])
+                    #for i in csv:
+                    #    print(i)
+                    #print("Cur==",cur)
+                    #res.append(line)
+                    print(name)
+                    print(len(name))
+                    count = len(name)
+            #pattern.match(s).group(1)
+                    print("Match found")
+                    write_to_file("SelfiePosFeatures_"+x+"_"+y+"_"+z,name,count)
+                    '''i = 0
+                    with open("csvfile.csv", "w") as file:
+                        for l in name:
+                            file.write(l)
+                            if i!= count-1:
+                                file.write(',')
+                            i+=1
+'''
+#print("result is ==== \n",res)
+
+'''
+print("res=",res)
+print("leng=",len(res))
+var2 = res[0][1].split(",")
+print(var2)
+name = []
+for str1 in var2:
+    name.append( str1.split("=")[1])
+    #print(name)
+#print(var1)
+#print(var2)
+
+#print(name)
+#print(''.join(res[0]))
+
+#data_file = open('naveen_example.csv','w')
+#with data_file:
+#    writer = csv.writer(data_file)
+#    writer.write(name)
+
+
+
+count = len(name)
+print("len=",count)
+i = 0
+with open("csvfile.csv", "w") as file:
+    for l in name:
+        file.write(l)
+        if i!= count-1:
+            file.write(',')
+        i+=1
+
+#By chance you don't want to insert a comma at last you have two options:
+# (1) Maintain a count and do not insert a count-1 record. Insert a new line character
+# (2) Insert the comma, seek to last character, delete it and insert a new line 
+
+#with open("csvfile.csv", 'rb+') as filehandle:
+#    filehandle.seek(-1, os.SEEK_END)
+#    filehandle.truncate()
+#file.truncate()
+
+'''
+
+print("Writing is complete")
