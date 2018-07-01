@@ -1,0 +1,21 @@
+width. -- 0
+height -- 1
+centerx -- 2
+centery --3
+Latitude -- 19
+Longitude --20
+brightnessOfMask --21
+brightnessOfRest --22
+brightnessTotal --23
+exposureTime --28
+gimbalPosition --- 29
+SaturationOfMaskRed --- 32
+SaturationOfMaskGreen -- 33
+SaturationOfMaskBlue -- 34
+SaturationOfRestRed -- 35
+SaturationOfRestGreen -- 36
+SaturationOfRestBlue -- 37
+SaturationTotalRed -- 50
+SaturationTotalGreen -- 51
+SaturationTotalBlue -- 52
+time -- 53
